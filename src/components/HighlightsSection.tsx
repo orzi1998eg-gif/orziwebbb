@@ -24,9 +24,9 @@ const iconMap = {
 };
 
 const floatingIcons = [
-  { Icon: Crown, top: '20%', left: '10%', size: 14, delay: 0 },
-  { Icon: Diamond, top: '70%', right: '12%', size: 12, delay: 2 },
-  { Icon: Star, top: '40%', left: '85%', size: 13, delay: 3.5 },
+  { Icon: Crown, top: '25%', left: '12%', size: 14, delay: 0 },
+  { Icon: Diamond, top: '65%', right: '15%', size: 12, delay: 2 },
+  { Icon: Star, top: '35%', left: '85%', size: 13, delay: 3.5 },
 ];
 
 interface HighlightsSectionProps {
@@ -44,7 +44,7 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
 
   return (
     <section
-      className="relative pt-40 md:pt-56 pb-32 md:pb-48 overflow-visible"
+      className="relative pt-32 md:pt-48 pb-28 md:pb-40"
       style={{
         background:
           'linear-gradient(180deg, #e7ddcc 0%, #f0ebe0 25%, #f5f0e8 55%, #f0ebe0 85%, #e7ddcc 100%)',
@@ -52,7 +52,7 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
       dir="rtl"
     >
       {/* Floating background icons */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {floatingIcons.map(({ Icon, top, left, right, size, delay }, i) => (
           <div
             key={i}
@@ -61,7 +61,7 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
               top,
               left,
               right,
-              opacity: 0.06,
+              opacity: 0.05,
               animation: `floatIcon 7s ease-in-out infinite`,
               animationDelay: `${delay}s`,
             }}
@@ -72,59 +72,61 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">
-        {/* Horizontal scroll container */}
+        {/* Horizontal scroll container with proper vertical padding to prevent scale clipping */}
         <div
-          className="flex gap-8 md:gap-16 justify-center items-start overflow-x-auto pb-4 scroll-smooth scrollbar-hide"
+          className="flex gap-8 md:gap-16 justify-center items-start overflow-x-auto py-8 scroll-smooth scrollbar-hide"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch',
           }}
         >
-          <div className="flex gap-8 md:gap-16 justify-center items-start" style={{ minWidth: 'min-content' }}>
+          <div className="flex gap-8 md:gap-16 justify-center items-start py-2" style={{ minWidth: 'min-content' }}>
             {highlights.map((h) => {
               const Icon = iconMap[h.icon];
               return (
                 <button
                   key={h.id}
                   onClick={() => handleClick(h)}
-                  className="flex flex-col items-center gap-5 group flex-shrink-0"
+                  className="flex flex-col items-center gap-4 group flex-shrink-0"
                   style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
                 >
-                  {/* Circle */}
-                  <div
-                    className="relative rounded-full transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      width: '116px',
-                      height: '116px',
-                      padding: '4px',
-                      background: '#243247',
-                      border: '2px solid #e7ddcc',
-                      boxShadow: '0 6px 24px rgba(36, 50, 71, 0.18)',
-                    }}
-                  >
-                    {/* Inner circle */}
+                  {/* Circle wrapper with padding space */}
+                  <div className="p-2">
                     <div
-                      className="w-full h-full rounded-full flex items-center justify-center transition-all duration-300"
+                      className="relative rounded-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl"
                       style={{
+                        width: '116px',
+                        height: '116px',
+                        padding: '4px',
                         background: '#243247',
-                        border: '1px solid rgba(231, 221, 204, 0.25)',
+                        border: '2px solid #e7ddcc',
+                        boxShadow: '0 6px 24px rgba(36, 50, 71, 0.18)',
                       }}
                     >
-                      <Icon
-                        size={34}
-                        className="transition-transform duration-300 group-hover:scale-110"
-                        style={{ color: '#e7ddcc', opacity: 0.9 }}
+                      {/* Inner circle */}
+                      <div
+                        className="w-full h-full rounded-full flex items-center justify-center transition-all duration-300"
+                        style={{
+                          background: '#243247',
+                          border: '1px solid rgba(231, 221, 204, 0.25)',
+                        }}
+                      >
+                        <Icon
+                          size={34}
+                          className="transition-transform duration-300 group-hover:scale-110"
+                          style={{ color: '#e7ddcc', opacity: 0.9 }}
+                        />
+                      </div>
+
+                      {/* Hover glow */}
+                      <div
+                        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{
+                          boxShadow: '0 0 32px rgba(231, 221, 204, 0.3), 0 0 60px rgba(36, 50, 71, 0.12)',
+                        }}
                       />
                     </div>
-
-                    {/* Hover glow */}
-                    <div
-                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{
-                        boxShadow: '0 0 32px rgba(231, 221, 204, 0.3), 0 0 60px rgba(36, 50, 71, 0.12)',
-                      }}
-                    />
                   </div>
 
                   {/* Label */}
@@ -133,7 +135,7 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
                     style={{
                       fontFamily: "'Amiri', serif",
                       color: '#243247',
-                      opacity: 0.8,
+                      opacity: 0.85,
                       letterSpacing: '0.03em',
                     }}
                   >
