@@ -153,6 +153,3 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
     </section>
   );
 }
-
-
-export default HighlightsSection
