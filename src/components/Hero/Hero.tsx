@@ -1,11 +1,10 @@
 import DecorativeIcon from '../DecorativeIcons';
 
 interface HeroProps {
-  onShopClick?: () => void;
   onStoryClick?: () => void;
 }
 
-export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
+export default function Hero({ onStoryClick }: HeroProps) {
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden pt-16">
       <div
@@ -34,16 +33,10 @@ export default function Hero({ onShopClick, onStoryClick }: HeroProps) {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={onShopClick}
-            className="px-8 py-4 bg-[#243247] text-[#e7ddcc] font-semibold rounded-lg hover:bg-[#e7ddcc] hover:text-[#243247] transition-all duration-300 transform hover:scale-105"
-          >
-            Orzi مجموعة
-          </button>
-          <button
             onClick={onStoryClick}
             className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#243247] transition-all duration-300 transform hover:scale-105"
           >
-            رؤيتنا
+            استكشف
           </button>
         </div>
       </div>
