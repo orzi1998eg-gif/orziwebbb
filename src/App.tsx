@@ -45,17 +45,10 @@ function App() {
     }
   };
 
-  const handleHeroExplore = () => {
-    const el = document.getElementById('highlights');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white" dir="ltr">
       <main>
-        <Hero onStoryClick={handleHeroExplore} />
+        <Hero />
 
         <div id="highlights">
           <HighlightsSection onStoryOpen={handleStoryOpen} />

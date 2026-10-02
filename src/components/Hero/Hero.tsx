@@ -1,10 +1,6 @@
 import DecorativeIcon from '../DecorativeIcons';
 
-interface HeroProps {
-  onStoryClick?: () => void;
-}
-
-export default function Hero({ onStoryClick }: HeroProps) {
+export default function Hero() {
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden pt-16">
       <div
@@ -23,22 +19,13 @@ export default function Hero({ onStoryClick }: HeroProps) {
       <DecorativeIcon icon="sparkles" position={{ bottom: '30%', left: '8%' }} delay={3} />
 
       <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-9 leading-tight">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-16" style={{ lineHeight: '2.2' }}>
           .خالد. راقٍ. أصيل
         </h1>
 
-        <p className="text-lg md:text-2xl text-white mb-12 font-light">
+        <p className="text-lg md:text-2xl text-white font-light" style={{ lineHeight: '2.4' }}>
           ...من أصالة ورقيّ الماضي
         </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={onStoryClick}
-            className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#243247] transition-all duration-300 transform hover:scale-105"
-          >
-            استكشف
-          </button>
-        </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">

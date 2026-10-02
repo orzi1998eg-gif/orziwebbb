@@ -1,4 +1,4 @@
-import { Star, Info, Clock, Sparkles } from 'lucide-react';
+import { Star, Info, Clock, Sparkles, Crown, Diamond } from 'lucide-react';
 
 export interface HighlightItem {
   id: string;
@@ -23,6 +23,17 @@ const iconMap = {
   upcoming: Sparkles,
 };
 
+const floatingIcons = [
+  { Icon: Crown, top: '12%', left: '8%', size: 20, delay: 0 },
+  { Icon: Diamond, top: '22%', right: '10%', size: 16, delay: 1.5 },
+  { Icon: Sparkles, top: '55%', left: '6%', size: 18, delay: 2.8 },
+  { Icon: Star, top: '68%', right: '8%', size: 14, delay: 1.0 },
+  { Icon: Crown, top: '80%', left: '14%', size: 16, delay: 3.5 },
+  { Icon: Diamond, top: '38%', right: '6%', size: 14, delay: 4.0 },
+  { Icon: Sparkles, top: '85%', right: '16%', size: 18, delay: 2.2 },
+  { Icon: Star, top: '15%', left: '22%', size: 12, delay: 5.0 },
+];
+
 interface HighlightsSectionProps {
   onStoryOpen: (storyId: string) => void;
 }
@@ -38,92 +49,97 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
 
   return (
     <section
-      className="py-20 md:py-32"
-      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f0e8 100%)' }}
+      className="relative py-32 md:py-48 overflow-hidden"
+      style={{
+        background:
+          'linear-gradient(180deg, #e7ddcc 0%, #f0ebe0 25%, #f5f0e8 55%, #f0ebe0 85%, #e7ddcc 100%)',
+      }}
       dir="rtl"
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <p
-            className="text-xs tracking-widest uppercase text-[#243247] mb-4"
-            style={{ fontFamily: "'Cinzel', serif", letterSpacing: '0.25em', opacity: 0.4 }}
+      {/* Floating background icons */}
+      <div className="absolute inset-0 pointer-events-none">
+        {floatingIcons.map(({ Icon, top, left, right, size, delay }, i) => (
+          <div
+            key={i}
+            className="absolute"
+            style={{
+              top,
+              left,
+              right,
+              opacity: 0.06,
+              animation: `floatIcon 7s ease-in-out infinite`,
+              animationDelay: `${delay}s`,
+            }}
           >
-            Highlights
-          </p>
-          <h2
-            className="text-3xl md:text-4xl font-bold text-[#243247]"
-            style={{ fontFamily: "'Amiri', serif" }}
-          >
-            استكشف عالم ORZI
-          </h2>
-          <div className="w-12 h-px bg-[#243247] opacity-20 mx-auto mt-6" />
-        </div>
+            <Icon size={size} className="text-[#243247]" />
+          </div>
+        ))}
+      </div>
 
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Horizontal scroll container */}
         <div
-          className="flex gap-6 md:gap-12 justify-center items-start overflow-x-auto pb-4 scroll-smooth"
+          className="flex gap-8 md:gap-16 justify-center items-start overflow-x-auto pb-4 scroll-smooth scrollbar-hide"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch',
           }}
         >
-          <style>{`
-            .highlights-scroll::-webkit-scrollbar { display: none; }
-          `}</style>
-          <div className="highlights-scroll flex gap-6 md:gap-12 justify-center items-start" style={{ minWidth: 'min-content' }}>
+          <div className="flex gap-8 md:gap-16 justify-center items-start" style={{ minWidth: 'min-content' }}>
             {highlights.map((h) => {
               const Icon = iconMap[h.icon];
               return (
                 <button
                   key={h.id}
                   onClick={() => handleClick(h)}
-                  className="flex flex-col items-center gap-4 group flex-shrink-0"
+                  className="flex flex-col items-center gap-5 group flex-shrink-0"
                   style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
                 >
-                  {/* Gradient ring circle */}
+                  {/* Circle */}
                   <div
-                    className="relative rounded-full transition-all duration-500 group-hover:scale-110"
+                    className="relative rounded-full transition-all duration-300 group-hover:scale-110"
                     style={{
-                      width: '96px',
-                      height: '96px',
-                      padding: '3px',
-                      background: 'linear-gradient(135deg, #243247 0%, #c9a94f 50%, #243247 100%)',
-                      boxShadow: '0 4px 20px rgba(36, 50, 71, 0.15)',
-                      animation: 'highlightPulse 3s ease-in-out infinite',
+                      width: '116px',
+                      height: '116px',
+                      padding: '4px',
+                      background: '#243247',
+                      border: '2px solid #e7ddcc',
+                      boxShadow: '0 6px 24px rgba(36, 50, 71, 0.18)',
                     }}
                   >
                     {/* Inner circle */}
                     <div
-                      className="w-full h-full rounded-full flex items-center justify-center transition-all duration-500"
+                      className="w-full h-full rounded-full flex items-center justify-center transition-all duration-300"
                       style={{
-                        background: 'linear-gradient(160deg, #f5f0e8 0%, #e7ddcc 100%)',
-                        border: '2px solid rgba(255,255,255,0.6)',
+                        background: '#243247',
+                        border: '1px solid rgba(231, 221, 204, 0.25)',
                       }}
                     >
                       <Icon
-                        size={32}
-                        className="text-[#243247] transition-transform duration-500 group-hover:scale-110"
-                        style={{ opacity: 0.85 }}
+                        size={34}
+                        className="transition-transform duration-300 group-hover:scale-110"
+                        style={{ color: '#e7ddcc', opacity: 0.9 }}
                       />
                     </div>
 
                     {/* Hover glow */}
                     <div
-                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{
-                        boxShadow: '0 0 24px rgba(201, 169, 79, 0.35)',
+                        boxShadow: '0 0 32px rgba(231, 221, 204, 0.3), 0 0 60px rgba(36, 50, 71, 0.12)',
                       }}
                     />
                   </div>
 
                   {/* Label */}
                   <span
-                    className="text-sm font-semibold text-[#243247] transition-all duration-300 group-hover:opacity-100"
+                    className="text-sm md:text-base font-semibold transition-all duration-300 group-hover:opacity-100"
                     style={{
                       fontFamily: "'Amiri', serif",
-                      opacity: 0.7,
-                      letterSpacing: '0.02em',
+                      color: '#243247',
+                      opacity: 0.8,
+                      letterSpacing: '0.03em',
                     }}
                   >
                     {h.title}
@@ -137,3 +153,6 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
     </section>
   );
 }
+
+
+export default HighlightsSection
