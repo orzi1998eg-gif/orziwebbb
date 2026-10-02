@@ -24,14 +24,9 @@ const iconMap = {
 };
 
 const floatingIcons = [
-  { Icon: Crown, top: '12%', left: '8%', size: 20, delay: 0 },
-  { Icon: Diamond, top: '22%', right: '10%', size: 16, delay: 1.5 },
-  { Icon: Sparkles, top: '55%', left: '6%', size: 18, delay: 2.8 },
-  { Icon: Star, top: '68%', right: '8%', size: 14, delay: 1.0 },
-  { Icon: Crown, top: '80%', left: '14%', size: 16, delay: 3.5 },
-  { Icon: Diamond, top: '38%', right: '6%', size: 14, delay: 4.0 },
-  { Icon: Sparkles, top: '85%', right: '16%', size: 18, delay: 2.2 },
-  { Icon: Star, top: '15%', left: '22%', size: 12, delay: 5.0 },
+  { Icon: Crown, top: '20%', left: '10%', size: 14, delay: 0 },
+  { Icon: Diamond, top: '70%', right: '12%', size: 12, delay: 2 },
+  { Icon: Star, top: '40%', left: '85%', size: 13, delay: 3.5 },
 ];
 
 interface HighlightsSectionProps {
@@ -49,7 +44,7 @@ export default function HighlightsSection({ onStoryOpen }: HighlightsSectionProp
 
   return (
     <section
-      className="relative py-32 md:py-48 overflow-hidden"
+      className="relative pt-40 md:pt-56 pb-32 md:pb-48 overflow-visible"
       style={{
         background:
           'linear-gradient(180deg, #e7ddcc 0%, #f0ebe0 25%, #f5f0e8 55%, #f0ebe0 85%, #e7ddcc 100%)',
